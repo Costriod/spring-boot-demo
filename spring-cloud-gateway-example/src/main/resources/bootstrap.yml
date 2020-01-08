@@ -1,0 +1,38 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: gateway
+  cloud:
+    consul:
+      config:
+        enabled: true
+        watch:
+          delay: 10000
+          enabled: true
+          wait-time: 10
+      discovery:
+        catalog-services-watch-delay: 100000
+        enabled: true
+        health-check-interval: 10s
+        health-check-path: /health
+        instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}:${server.port}
+        service-name: ${spring.application.name}
+      host: 127.0.0.1
+      port: 8500
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      enabled: true
+      routes:
+        - id: zipkin-client
+          uri: lb://zipkin-client
+          predicates:
+            - Path=/**
+          filters:
+            - AddRequestHeader=cache-control, no-cache
+    sentinel:
+      transport:
+        dashboard: localhost:11000
+        port: 8719
