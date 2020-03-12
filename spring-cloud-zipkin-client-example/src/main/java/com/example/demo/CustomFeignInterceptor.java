@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 public class CustomFeignInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
         //定制化feign client请求头
-        requestTemplate.header("aaa", request.getHeader("aaa"));
+        requestTemplate.header("cache-control", "no-cache");
     }
 }

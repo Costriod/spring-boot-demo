@@ -24,8 +24,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-@Component
-@Order(Ordered.LOWEST_PRECEDENCE)
 public class CustomConcurrencyStrategy extends HystrixConcurrencyStrategy {
     private static final Logger log = LoggerFactory.getLogger(CustomConcurrencyStrategy.class);
     private HystrixConcurrencyStrategy delegate;

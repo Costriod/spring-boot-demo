@@ -13,6 +13,8 @@ public interface UserMapper {
 
     List<User> selectByName(String name);
 
+    List<User> selectByRole(String role);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

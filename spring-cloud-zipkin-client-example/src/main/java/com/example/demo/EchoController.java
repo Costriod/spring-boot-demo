@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,11 @@ public class EchoController {
 
     @RequestMapping("/hello")
     public String hello(HttpServletRequest request) {
+        Enumeration<String> header = request.getHeaderNames();
+        while (header.hasMoreElements()) {
+            String key = header.nextElement();
+            System.out.println(key + ": " + request.getHeader(key));
+        }
         return provider.hello();
     }
 }

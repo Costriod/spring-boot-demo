@@ -9,6 +9,10 @@
   <sql id="Base_Column_List">
     id, name, age
   </sql>
+
+  <sql id="Custom_Column_List">
+    a.id, a.name, a.age
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -21,6 +25,13 @@
     <include refid="Base_Column_List" />
     from user
     where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Custom_Column_List" />
+    from user as a, user_role as b
+    where b.role = #{role,jdbcType=VARCHAR} and b.uid = a.id
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
